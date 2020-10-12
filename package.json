@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --init",
+    "lint": "esw src --watch --fix",
     "clean": "rimraf build",
     "build": "babel src -d build",
     "start:build": "npm-run-all clean build",
-    "start": "npm start"
+    "start": "cross-env NODE_ENV=development DEBUG=worker nodemon --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,16 @@
   "dependencies": {
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/polyfill": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
+    "@babel/register": "^7.11.5",
+    "@babel/runtime": "^7.11.2",
     "babel-watch": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.0",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "debug": "^4.2.0",
     "dotenv": "^8.2.0",
@@ -41,8 +46,10 @@
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.4"
   }
 }

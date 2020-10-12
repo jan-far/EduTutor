@@ -6,3 +6,6 @@ node_modules
 
 # Generated Es5 modules
 build
+
+#VScode Editor settings
+.vscode
