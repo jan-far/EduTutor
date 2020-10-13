@@ -2,14 +2,20 @@ import express from "express";
 import mongoose from "mongoose";
 import debug from "debug";
 import chalk from "chalk";
-import config from "./config";
+import cors from "cors";
+import logger from "morgan";
 import { Environment } from "./env";
 
-let app = express();
+const app = express();
 const port = parseInt(process.env.PORT || "3000");
 const log = debug("worker");
 
-app = config(app);
+app.use(express.json());
+app.use(express.urlencoded(
+  { extended: false },
+));
+app.use(logger("dev"));
+app.use(cors("*"));
 
 app.listen(port, async () => {
   log(chalk.greenBright(`Server running on port ${port}`));
