@@ -16,17 +16,19 @@
     "sourceType": "module"
   },
   "rules": {
+    "radix": "off",
     "max-len": "off",
     "no-shadow": "off",
     "no-console": "off",
-    "no-restricted-syntax": "off",
-    "consistent-return": "off",
-    "radix": "off",
     "import/named": "off",
+    "comma-dangle": "off",
+    "linebreak-style": "off",
     "prefer-template": "off",
     "import/namespace": "off",
-    "linebreak-style": "off",
+    "consistent-return": "off",
+    "no-param-reassign": "off",
     "quotes": ["error", "double"],
+    "no-restricted-syntax": "off",
     "import/no-mutable-exports": "off",
     "import/prefer-default-export": "off"
   }
