@@ -19,11 +19,19 @@ export class Helper {
   }
 
   /* Gnerate Token */
-  static generateToken(id) {
-    const token = jwt.sign({
-      userId: id,
-    },
-    Environment.JWT_SECRET, { expiresIn: "4d" });
+  static generateToken(payload) {
+    console.log(...payload)
+    const token = jwt.sign({...payload}, Environment.JWT_SECRET, { expiresIn: "4d" });
     return token;
+  }
+
+  /* Verify the token */
+  static verifyToken(token) {
+    return jwt.verify(token, Environment.JWT_SECRET);
+  }
+
+  /* Decode token */
+  static decode(token) {
+    return jwt.decode(token);
   }
 }

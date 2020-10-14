@@ -5,6 +5,7 @@ import chalk from "chalk";
 import cors from "cors";
 import logger from "morgan";
 import { Environment } from "./env";
+import router from "./routes";
 
 const app = express();
 const port = parseInt(process.env.PORT || "3000");
@@ -16,6 +17,11 @@ app.use(express.urlencoded(
 ));
 app.use(logger("dev"));
 app.use(cors("*"));
+app.use("/api/v1", router)
+
+app.use("/", (req, res) => {
+  res.send("welcome to edututor")
+})
 
 app.listen(port, async () => {
   log(chalk.greenBright(`Server running on port ${port}`));
