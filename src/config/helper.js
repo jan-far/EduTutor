@@ -20,7 +20,6 @@ export class Helper {
 
   /* Gnerate Token */
   static generateToken(payload) {
-    console.log(...payload)
     const token = jwt.sign({...payload}, Environment.JWT_SECRET, { expiresIn: "4d" });
     return token;
   }

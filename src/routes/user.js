@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Auth } from "../controller";
-import { checkEmailExist, ValidateBody } from "../middlewares";
+import { ValidateBody } from "../middlewares";
 
 const router = Router();
 
