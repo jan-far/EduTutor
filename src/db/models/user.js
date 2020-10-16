@@ -11,6 +11,7 @@ export class AuthModel {
       firstname: { type: String, required: true },
       lastname: { type: String, required: true },
       username: { type: String, required: true },
+      phone: { type: Number, required: true },
       email: { type: String, required: true },
       password: { type: String, required: true },
       role: [{
@@ -20,21 +21,24 @@ export class AuthModel {
       }],
     }, { timestamps: true });
 
+    // Add save pre-hook: encrypt password
+    userSchema.pre("save", function callback(next) {
+      const doc = this;
+      if (doc.isModified("password")) {
+        doc.role = "Student";
+        doc.password = Helper.hashPassword(doc.password);
+      }
+      next();
+    });
+
     // Format response in JSON, hide password and id
     userSchema.set("toJSON", {
       virtuals: true,
       versionKey: false,
       transform(doc, ret) {
-        // delete ret._id;
+        delete ret._id;
         delete ret.password;
       },
-    });
-
-    // Add save pre-hook: encrypt password
-    userSchema.pre("save", (next) => {
-      const doc = this;
-      if (doc.isModified("password")) doc.password = Helper.hashPassword(doc.password);
-      next();
     });
 
     this.model = mongoose.model("User", userSchema);
@@ -50,6 +54,12 @@ export class AuthModel {
     return Promise.resolve(
       this.model.findOne({ email }),
     );
+  }
+
+  findByUsername(username) {
+    return Promise.resolve(
+      this.model.findOne({ username })
+    )
   }
 
   findById(_id) {

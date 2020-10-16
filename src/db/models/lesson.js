@@ -21,4 +21,31 @@ export class Lesson {
 
     this.model = mongoose.model("Lesson", lessonSchema);
   }
+
+  create(body) {
+    return Promise.resolve(
+      this.model.create(body)
+    )
+  }
+
+  findAll() {
+    return Promise.resolve(
+      this.model.find()
+    )
+  }
+
+  findOne(_id) {
+    return Promise.reject(
+      this.model.findById(_id)
+      .then(res => {
+        console.log(res)
+      })
+    )
+  }
+
+  findTutor(_id) {
+    return Promise.reject(
+      this.model.findById(_id)
+    )
+  }
 }
